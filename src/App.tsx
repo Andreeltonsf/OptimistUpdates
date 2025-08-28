@@ -1,9 +1,12 @@
-import { Button } from "./components/ui/button";
+import { ThemeProvider } from "./app/contexts/ThemeContext";
+import { ThemeSwitcher } from "./components/ThemeSwitcher";
 
 export function App(){
   return(
-    <div className="flex items-center justify-center h-screen">
-      <Button onSelect={() => alert("Hello!")}>Click me</Button>
-    </div>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div className="flex flex-col items-center justify-center ">
+        <ThemeSwitcher />
+      </div>
+    </ThemeProvider>
   )
 }
