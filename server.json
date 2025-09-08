@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "id": "12",
+      "name": "John",
+      "username": "johndoe",
+      "blocked": false
+    },
+    {
+      "id": "123",
+      "name": "Jane",
+      "username": "janedoe",
+      "blocked": false
+    },
+    {
+      "id": "1234",
+      "name": "Bob",
+      "username": "bobdo",
+      "blocked": false
+    },
+    {
+      "id": "7875",
+      "blocked": false,
+      "name": "Nau",
+      "username": "Nau"
+    },
+    {
+      "id": "0fb6",
+      "blocked": false,
+      "name": "Au",
+      "username": "AU"
+    },
+    {
+      "id": "78a9",
+      "blocked": false,
+      "name": "Eltis",
+      "username": "Eltis"
+    }
+  ]
+}
