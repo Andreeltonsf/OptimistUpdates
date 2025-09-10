@@ -5,6 +5,7 @@ import { USERS_QUERY_KEY } from "./useUsers";
 export function useCreateUser() {
   const queryClient = useQueryClient();
   const { mutateAsync, isPending } = useMutation({
+    mutationKey: ["createUser"],
     mutationFn: createUser,
     onSuccess: () => {
       // Aqui você pode invalidar queries ou atualizar o cache, se necessário

@@ -1,5 +1,7 @@
 import { useUpdateUser } from "@/app/hooks/useUpdateUser";
 import { useUsers } from "@/app/hooks/useUsers";
+import type { IUser } from "@/app/types/IUser";
+import { useMutationState } from "@tanstack/react-query";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Skeleton } from "./ui/skeleton";
 import { Switch } from "./ui/switch";
@@ -7,6 +9,13 @@ import { Switch } from "./ui/switch";
 export function UsersLists() {
   const { users, isLoading } = useUsers();
   const { updateUser } = useUpdateUser();
+
+  const pendinhUsers = useMutationState({
+    filters: {
+      mutationKey: ["createUser"],
+    },
+    select: (mutation) => mutation.state.variables as Omit<IUser, "id">,
+  });
 
   async function handleBlockedChange(id: string, blocked: boolean) {
     await updateUser({
