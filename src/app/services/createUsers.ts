@@ -3,7 +3,7 @@ import type { IUser } from "../types/IUser";
 type ICreateUserDTO = Omit<IUser, "id">;
 
 export async function createUser({ blocked, name, username }: ICreateUserDTO) {
-  const response = await fetch("http://localhost:3000/users", {
+  const response = await fetch("http://localhost:3001/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

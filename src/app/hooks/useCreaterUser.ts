@@ -9,11 +9,19 @@ export function useCreateUser() {
     mutationFn: createUser,
     //onMutate - executa diretamente antes de executar a função
     onMutate: (variables) => {
+      const tmpUserId = String(Math.random());
+
+      return { tmpUserId };
+    },
+    // Irá atualizar a lista de usuários após a função ser executada
+    onSuccess: (data, _variables, context) => {
       queryClient.setQueryData<IUser[]>(USERS_QUERY_KEY, (old) =>
-        old?.concat({
-          ...variables,
-          id: String(Math.random()),
-        })
+        old?.map((user) => (user.id === context.tmpUserId ? data : user))
+      );
+    },
+    onError: (_error, _variables, context) => {
+      queryClient.setQueryData<IUser[]>(USERS_QUERY_KEY, (old) =>
+        old?.filter((user) => user.id !== context?.tmpUserId)
       );
     },
   });

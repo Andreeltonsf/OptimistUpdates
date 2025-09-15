@@ -14,16 +14,13 @@ export function UserForm() {
     e.preventDefault();
 
     try {
+      setName("");
+      setUsername("");
       await createdUser({
         name,
         username,
         blocked: false,
       });
-
-      setName("");
-      setUsername("");
-
-      toast.success("Usuário cadastrado com sucesso");
     } catch (err) {
       toast.error("Erro ao cadastrar usuário");
     }
