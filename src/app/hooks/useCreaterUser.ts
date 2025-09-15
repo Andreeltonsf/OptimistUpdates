@@ -9,7 +9,7 @@ export function useCreateUser() {
     mutationFn: createUser,
     onSuccess: () => {
       // Aqui você pode invalidar queries ou atualizar o cache, se necessário
-      queryClient.invalidateQueries({ queryKey: USERS_QUERY_KEY });
+      return queryClient.invalidateQueries({ queryKey: USERS_QUERY_KEY });
     },
   });
 

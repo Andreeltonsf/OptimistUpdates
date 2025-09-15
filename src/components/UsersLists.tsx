@@ -10,8 +10,9 @@ export function UsersLists() {
   const { users, isLoading } = useUsers();
   const { updateUser } = useUpdateUser();
 
-  const pendinhUsers = useMutationState({
+  const pendingUsers = useMutationState({
     filters: {
+      status: "pending",
       mutationKey: ["createUser"],
     },
     select: (mutation) => mutation.state.variables as Omit<IUser, "id">,
@@ -51,6 +52,29 @@ export function UsersLists() {
             className="mt-4"
             //checked={user.blocked}
             onCheckedChange={(blocked) => handleBlockedChange(user.id, blocked)}
+          />
+        </div>
+      ))}
+
+      {pendingUsers.map((user) => (
+        <div
+          key={String(Math.random())}
+          className="p-4 mb-4 border rounded-lg flex flex-row justify-between "
+        >
+          <div>
+            <Avatar>
+              <AvatarImage src={`https://github.com/${user.username}.png`} />
+              <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+            </Avatar>
+            <h2 className="text-xl font-bold">
+              {user.name} ({user.username})
+            </h2>
+          </div>
+
+          <Switch
+            className="mt-4"
+            //checked={user.blocked}
+            //onCheckedChange={(blocked) => handleBlockedChange(user.id, blocked)}
           />
         </div>
       ))}

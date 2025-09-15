@@ -7,34 +7,16 @@
       "blocked": false
     },
     {
-      "id": "123",
-      "name": "Jane",
-      "username": "janedoe",
-      "blocked": false
-    },
-    {
-      "id": "1234",
-      "name": "Bob",
-      "username": "bobdo",
-      "blocked": false
-    },
-    {
-      "id": "7875",
+      "id": "36c7",
       "blocked": false,
-      "name": "Nau",
-      "username": "Nau"
+      "name": "AK",
+      "username": "AK"
     },
     {
-      "id": "0fb6",
+      "id": "b37b",
       "blocked": false,
-      "name": "Au",
-      "username": "AU"
-    },
-    {
-      "id": "78a9",
-      "blocked": false,
-      "name": "Eltis",
-      "username": "Eltis"
+      "name": "Andre",
+      "username": "andreeltonsf"
     }
   ]
 }
