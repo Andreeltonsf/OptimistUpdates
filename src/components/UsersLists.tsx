@@ -4,43 +4,42 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Skeleton } from "./ui/skeleton";
 import { Switch } from "./ui/switch";
 
-export function UsersLists() {
+export function UsersList() {
   const { users, isLoading } = useUsers();
   const { updateUser } = useUpdateUser();
 
   async function handleBlockedChange(id: string, blocked: boolean) {
-    await updateUser({
-      blocked,
-      id,
-    });
+    await updateUser({ id, blocked });
   }
+
   return (
-    <div>
+    <div className="space-y-4">
       {isLoading && (
-        <div>
-          <Skeleton className="h-[74px] " />
-          <Skeleton className="h-[74px] " />
-          <Skeleton className="h-[74px] " />
-        </div>
+        <>
+          <Skeleton className="h-[74px]" />
+          <Skeleton className="h-[74px]" />
+          <Skeleton className="h-[74px]" />
+        </>
       )}
+
       {users.map((user) => (
-        <div
-          key={user.id}
-          className="p-4 mb-4 border rounded-lg flex flex-row justify-between "
-        >
-          <div>
+        <div key={user.id} className="flex items-center justify-between">
+          <div className="flex items-center gap-4 ">
             <Avatar>
               <AvatarImage src={`https://github.com/${user.username}.png`} />
-              <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+              <AvatarFallback>
+                {user.name.charAt(0).toUpperCase()}
+              </AvatarFallback>
             </Avatar>
-            <h2 className="text-xl font-bold">
-              {user.name} ({user.username})
-            </h2>
-          </div>
 
+            <div>
+              <strong className="text-lg block leading-4">{user.name}</strong>
+              <small className="text-muted-foreground">@{user.username}</small>
+            </div>
+          </div>
           <Switch
-            className="mt-4"
-            //checked={user.blocked}
+            type="button"
+            checked={user.blocked}
             onCheckedChange={(blocked) => handleBlockedChange(user.id, blocked)}
           />
         </div>

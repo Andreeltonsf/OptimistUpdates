@@ -11,15 +11,26 @@ export function useCreateUser() {
     onMutate: (variables) => {
       const tmpUserId = String(Math.random());
 
+      //queryClient.setQueryData<IUser[]>(USERS_QUERY_KEY, (old) =>
+      //old?.concat({
+        ///  ...variables,
+        //id: tmpUserId,
+        //status: "pending",
+        //})
+      //);
+
       return { tmpUserId };
     },
     // Irá atualizar a lista de usuários após a função ser executada
-    onSuccess: (data, _variables, context) => {
+    onSuccess: async (data, _variables, context) => {
+      await queryClient.cancelQueries({ queryKey: USERS_QUERY_KEY });
       queryClient.setQueryData<IUser[]>(USERS_QUERY_KEY, (old) =>
         old?.map((user) => (user.id === context.tmpUserId ? data : user))
       );
     },
-    onError: (_error, _variables, context) => {
+    //Roolback - desfaz a ação anterior caso dê erro
+    onError: async (_error, _variables, context) => {
+      await queryClient.cancelQueries({ queryKey: USERS_QUERY_KEY });
       queryClient.setQueryData<IUser[]>(USERS_QUERY_KEY, (old) =>
         old?.filter((user) => user.id !== context?.tmpUserId)
       );

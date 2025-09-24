@@ -8,7 +8,7 @@ export async function updateUser({
   name,
   username,
 }: IUpdateUserDTO) {
-  const response = await fetch(`http://localhost:3000/users/${id}`, {
+  const response = await fetch(`http://localhost:30000/users/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

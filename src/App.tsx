@@ -4,7 +4,7 @@ import { ThemeProvider } from "./app/contexts/ThemeContext";
 import { queryClient } from "./app/lib/queryClient";
 import { Header } from "./components/Header";
 import { UserForm } from "./components/UserForm";
-import { UsersLists } from "./components/UsersLists";
+import { UsersList } from "./components/UsersLists";
 import { Toaster } from "./components/ui/sonner";
 
 export function App() {
@@ -16,7 +16,7 @@ export function App() {
 
           <main className="mt-10 space-y-3">
             <UserForm />
-            <UsersLists />
+            <UsersList />
           </main>
         </div>
         <Toaster />
