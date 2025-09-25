@@ -8,11 +8,12 @@ export function useUpdateUser() {
   const queryClient = useQueryClient();
   const { mutateAsync, isPending } = useMutation({
     mutationFn: updateUser,
-    onMutate: async (variables) => {
-      // Cancel any outgoing refetches to prevent optimistic update conflicts
+    retry: false,
+    onMutate: (variables) => {
+      //Utilizamos o map para pegar o usuário que foi clicado ou editado e atualizamos ele na cache
 
-      const previousUserData =
-        queryClient.getQueryData<IUser[]>(USERS_QUERY_KEY);
+      //Tirando uma "foto" dos usuários antes de atualizar a cache
+      const previousUser = queryClient.getQueryData<IUser[]>(USERS_QUERY_KEY);
 
       queryClient.setQueryData<IUser[]>(USERS_QUERY_KEY, (old) =>
         old?.map((user) =>
@@ -20,18 +21,16 @@ export function useUpdateUser() {
         )
       );
 
-      return { previousUserData };
+      return { previousUser };
     },
     onError: async (_error, _variables, context) => {
+      //Se der erro, voltamos a cache para o estado anterior
+
       await queryClient.cancelQueries({ queryKey: USERS_QUERY_KEY });
 
-      if (context?.previousUserData) {
-        queryClient.setQueryData<IUser[]>(
-          USERS_QUERY_KEY,
-          context?.previousUserData
-        );
-      }
-      toast.error("Failed to update user");
+      queryClient.setQueryData<IUser[]>(USERS_QUERY_KEY, context?.previousUser);
+
+      toast.error("Não foi possível atualizar o usuário");
     },
   });
 

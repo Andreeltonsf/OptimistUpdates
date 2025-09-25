@@ -2,10 +2,10 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider } from "./app/contexts/ThemeContext";
 import { queryClient } from "./app/lib/queryClient";
-import { Header } from "./components/Header";
-import { UserForm } from "./components/UserForm";
-import { UsersList } from "./components/UsersLists";
-import { Toaster } from "./components/ui/sonner";
+import { Header } from "./ui/components/Header";
+import { UserForm } from "./ui/components/UserForm";
+import { UsersList } from "./ui/components/UsersLists";
+import { Toaster } from "./ui/components/ui/sonner";
 
 export function App() {
   return (
